@@ -1,7 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 
 export default component$(() => {
-  console.log("Hello");
   return (
     <article>
       <h2>About</h2>
