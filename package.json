@@ -36,6 +36,7 @@
     "vite-tsconfig-paths": "3.5.0"
   },
   "dependencies": {
+    "postcss": "^8.4.21",
     "tailwind": "^4.0.0"
   }
 }
