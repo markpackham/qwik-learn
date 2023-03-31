@@ -33,7 +33,13 @@ export default component$(() => {
 
       {modalVisible.value && (
         <Modal>
-          <h2>Hello World</h2>
+          <div q:slot="content">
+            <h2>Great News!!!</h2>
+            <p>This is the main content</p>
+          </div>
+          <div q:slot="footer">
+            <p>This is the footer</p>
+          </div>
         </Modal>
       )}
     </article>

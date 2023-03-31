@@ -9,9 +9,11 @@ export default component$(() => {
       <div class="modal-content">
         <div class="close">
           <main class="main">
-            <Slot />
+            <Slot name="content" />
           </main>
-          <footer>modal footer content</footer>
+          <footer>
+            <Slot name="footer" />
+          </footer>
         </div>
       </div>
     </div>
