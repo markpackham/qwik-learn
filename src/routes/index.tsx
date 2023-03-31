@@ -1,6 +1,12 @@
 import { component$, useSignal, useStore } from "@builder.io/qwik";
 import type { DocumentHead, RequestHandler } from "@builder.io/qwik-city";
 
+interface BlogData {
+  id: string;
+  title: string;
+  content: string;
+}
+
 export const onGet: RequestHandler<>;
 
 export default component$(() => {
