@@ -17,9 +17,26 @@ export const useBlogData = routeLoader$(async () => {
 export default component$(() => {
   const blogs = useBlogData().value;
 
-  console.log(blogs[0].title);
-
-  return <div>{String(blogs)}</div>;
+  return (
+    <div>
+      <h1>Welcome to the Blog</h1>
+      <Resource
+        value={blogs}
+        onPending={() => <div>Loading blogs...</div>}
+        onResolved={(blogs) => (
+          <div class="blogs">
+            {blogs !== null &&
+              blogs.map((blog) => (
+                <div key={blog.id}>
+                  <h3>{blog.title}</h3>
+                  <p>{blog.content.slice(0, 50)}...</p>
+                </div>
+              ))}
+          </div>
+        )}
+      />
+    </div>
+  );
 });
 
 export const head: DocumentHead = {
