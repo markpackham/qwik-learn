@@ -1,5 +1,5 @@
 import { component$, Resource } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { DocumentHead, Link } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
 
 interface BlogData {
@@ -30,6 +30,7 @@ export default component$(() => {
                 <div key={blog.id}>
                   <h3>{blog.title}</h3>
                   <p>{blog.content.slice(0, 50)}...</p>
+                  <Link href={`/blog/${blog.id}`}>Read more</Link>
                 </div>
               ))}
           </div>
