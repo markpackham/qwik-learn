@@ -9,6 +9,11 @@ interface BlogData {
 
 export const useBlogData = routeLoader$(async ({ params }) => {
   const res = await fetch(`http://localhost:3000/blogs/${params.id}`);
+
+  if (!res.ok) {
+    console.log("Page does not exist");
+  }
+
   const blogObj = (await res.json()) as BlogData;
   return blogObj;
 });
