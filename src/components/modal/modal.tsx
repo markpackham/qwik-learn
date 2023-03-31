@@ -1,26 +1,29 @@
-import { component$, Slot, useStylesScoped$ } from "@builder.io/qwik";
-import ModalStyles from "./modal.css?inline";
+import { component$, useStylesScoped$, Slot } from "@builder.io/qwik";
+import modalStyles from "./modal.css?inline";
+import type { PropFunction } from "@builder.io/qwik";
 
 interface ModalProps {
   size: "sm" | "lg";
-  // frosted is optional hence the ?
   frosted?: boolean;
+  close: PropFunction<() => void>;
 }
 
 export default component$((props: ModalProps) => {
-  useStylesScoped$(ModalStyles);
+  useStylesScoped$(modalStyles);
 
   return (
-    <div class={`modal ${props.size}  ${props.frosted && "frosted"}`}>
+    <div class={`modal ${props.size} ${props.frosted && "frosted"}`}>
       <div class="modal-content">
-        <div class="close">
-          <main class="main">
-            <Slot name="content" />
-          </main>
-          <footer>
-            <Slot name="footer" />
-          </footer>
+        <div class="close" onClick$={props.close}>
+          close
         </div>
+        {/* <Slot /> */}
+        <main class="main-content">
+          <Slot name="content" />
+        </main>
+        <footer>
+          <Slot name="footer" />
+        </footer>
       </div>
     </div>
   );

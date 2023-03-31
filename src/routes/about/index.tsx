@@ -1,4 +1,4 @@
-import { component$, useSignal, useStyles$ } from "@builder.io/qwik";
+import { $, component$, useSignal, useStyles$ } from "@builder.io/qwik";
 import Modal from "~/components/modal/modal";
 import AboutStyles from "./about.css?inline";
 
@@ -6,6 +6,15 @@ export default component$(() => {
   useStyles$(AboutStyles);
 
   const modalVisible = useSignal(false);
+
+  // the $ function turns this function into a QRL (Qwik URL)
+  // a Qwik URL used to lazy load content
+  // https://qwik.builder.io/docs/advanced/qrl/
+  // so it's a string path to the function
+  // this is because the Client can only handle Html, not functions
+  const closeModal = $(() => {
+    modalVisible.value = false;
+  });
 
   return (
     <article>
@@ -32,7 +41,7 @@ export default component$(() => {
       <button onClick$={() => (modalVisible.value = true)}>Open Modal</button>
 
       {modalVisible.value && (
-        <Modal size="sm" frosted={true}>
+        <Modal size="sm" frosted={true} close={closeModal}>
           <div q:slot="content">
             <h2>Great News!!!</h2>
             <p>This is the main content</p>
