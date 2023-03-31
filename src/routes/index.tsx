@@ -1,5 +1,6 @@
-import { component$, useSignal, useStore } from "@builder.io/qwik";
-import type { DocumentHead, RequestHandler } from "@builder.io/qwik-city";
+import { component$, Resource } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$ } from "@builder.io/qwik-city";
 
 interface BlogData {
   id: string;
@@ -7,40 +8,17 @@ interface BlogData {
   content: string;
 }
 
-export const onGet: RequestHandler<>;
+export const useBlogData = routeLoader$(async () => {
+  const res = await fetch("http://localhost:3000/blogs");
+  const blogs = (await res.json()) as BlogData;
+  return blogs;
+});
 
 export default component$(() => {
-  // signal is used for primative State
-  const name = useSignal("mario");
+  const blog = useBlogData();
 
-  // store is used for objects & array State
-  const person = useStore({ name: "peach", age: 30 });
-
-  const blogs = useStore([
-    { id: 1, title: "my first blog" },
-    { id: 2, title: "my second blog" },
-    { id: 3, title: "marmite rules!" },
-  ]);
-
-  return (
-    <div>
-      <h1>Okie Dokie!</h1>
-
-      <p>Hello, {name.value}</p>
-      <p>
-        Hello, {person.name}, you are {person.age} years young
-      </p>
-
-      <button onClick$={() => (name.value = "luigi")}>click me</button>
-      <button onClick$={() => (person.name = "bowser")}>click me again</button>
-
-      {blogs.map((blog) => (
-        <div key={blog.id}>{blog.title}</div>
-      ))}
-
-      <button onClick$={() => blogs.pop()}>remove a blog</button>
-    </div>
-  );
+  console.log(blog);
+  return <div>Blog name:</div>;
 });
 
 export const head: DocumentHead = {
