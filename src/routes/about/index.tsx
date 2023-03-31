@@ -31,7 +31,11 @@ export default component$(() => {
 
       <button onClick$={() => (modalVisible.value = true)}>Open Modal</button>
 
-      {modalVisible.value && <Modal></Modal>}
+      {modalVisible.value && (
+        <Modal>
+          <h2>Hello World</h2>
+        </Modal>
+      )}
     </article>
   );
 });
