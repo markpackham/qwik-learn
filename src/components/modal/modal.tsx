@@ -9,7 +9,7 @@ export default component$((props: ModalProps) => {
   useStylesScoped$(ModalStyles);
 
   return (
-    <div class="modal">
+    <div class={`modal ${props.size}`}>
       <div class="modal-content">
         <div class="close">
           <main class="main">
