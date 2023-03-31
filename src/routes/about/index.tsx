@@ -32,7 +32,7 @@ export default component$(() => {
       <button onClick$={() => (modalVisible.value = true)}>Open Modal</button>
 
       {modalVisible.value && (
-        <Modal size="sm">
+        <Modal size="sm" frosted={true}>
           <div q:slot="content">
             <h2>Great News!!!</h2>
             <p>This is the main content</p>
