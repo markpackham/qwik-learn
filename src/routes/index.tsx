@@ -15,10 +15,11 @@ export const useBlogData = routeLoader$(async () => {
 });
 
 export default component$(() => {
-  const blog = useBlogData();
+  const blogs = useBlogData().value;
 
-  console.log(blog);
-  return <div>Blog name:</div>;
+  console.log(blogs[0].title);
+
+  return <div>{String(blogs)}</div>;
 });
 
 export const head: DocumentHead = {
