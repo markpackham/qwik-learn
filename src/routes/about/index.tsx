@@ -1,8 +1,11 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$, useSignal, useStyles$ } from "@builder.io/qwik";
+import Modal from "~/components/modal/modal";
 import AboutStyles from "./about.css?inline";
 
 export default component$(() => {
   useStyles$(AboutStyles);
+
+  const modalVisible = useSignal(false);
 
   return (
     <article>
@@ -25,6 +28,10 @@ export default component$(() => {
         earum, aspernatur eius porro vitae veritatis ab iste accusamus delectus
         fugiat!
       </p>
+
+      <button onClick$={() => (modalVisible.value = true)}>Open Modal</button>
+
+      {modalVisible.value && <Modal></Modal>}
     </article>
   );
 });
