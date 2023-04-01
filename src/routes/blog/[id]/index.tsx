@@ -7,11 +7,11 @@ interface BlogData {
   content: string;
 }
 
-export const useBlogData = routeLoader$(async ({ params }) => {
+export const useBlogData = routeLoader$(async ({ params, redirect }) => {
   const res = await fetch(`http://localhost:3000/blogs/${params.id}`);
 
   if (!res.ok) {
-    console.log("Page does not exist");
+    redirect(301, "/");
   }
 
   const blogObj = (await res.json()) as BlogData;
